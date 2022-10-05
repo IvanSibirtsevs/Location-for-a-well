@@ -1,45 +1,44 @@
-# Описание проекта
+# Description of the project
 
-*Допустим, вы работаете в добывающей компании «ГлавРосГосНефть». Нужно решить, где бурить новую скважину.
-Мне предоставлены пробы нефти в трёх регионах: в каждом 10 000 месторождений, где измерили качество нефти и объём её запасов. Постройте модель машинного обучения, которая поможет определить регион, где добыча принесёт наибольшую прибыль. Нужно Проанализировать возможную прибыль и риски техникой Bootstrap*
+*Let's say you work for the mining company GlavRosGosNeft. We need to decide where to drill a new well.
+I was provided with oil samples in three regions: in each of 10,000 fields, where they measured the quality of oil and the volume of its reserves. Build a machine learning model to help determine the region where mining will bring the most profit. It is necessary to analyze the possible profit and risks using the Bootstrap* technique
 
-- 
-*Шаги для выбора локации:*
-- 
-- В избранном регионе ищут месторождения, для каждого определяют значения признаков;
-- Строят модель и оценивают объём запасов;
-- Выбирают месторождения с самым высокими оценками значений. Количество месторождений зависит от бюджета компании и стоимости разработки одной скважины;
-- Прибыль равна суммарной прибыли отобранных месторождений.
+*Steps for choosing a location:*
+-
+- In the selected region, they are looking for deposits, for each, the values of the signs are determined;
+- Build a model and estimate the volume of reserves;
+- Select the deposits with the highest value estimates. The number of fields depends on the company's budget and the cost of developing one well;
+- The profit is equal to the total profit of the selected deposits.
 
 
-1. Загрузка и подготовка данных
-2. Обучите и проверка модели для каждого региона:
-    - Разбеение данных на обучающую и валидационную выборки в соотношении 75:25.
-    - Обучение модели и предсказания на валидационной выборке.
-    - Сохранение предсказания и правильных ответов на валидационной выборке.
-    - Напечатать на экране средний запас предсказанного сырья и RMSE модели.
-    - Проанализировать результаты.
-3. Подготовка к расчёту прибыли:
-    - Все ключевые значения для расчётов сохранить в отдельных переменных.
-    - Рассчитать достаточный объём сырья для безубыточной разработки новой скважины. Сравнение полученного объёма сырья со средним запасом в каждом регионе.
-    - Выводы по этапу подготовки расчёта прибыли.
-4. Функция для расчёта прибыли по выбранным скважинам и предсказаниям модели:
-    - Выберать скважины с максимальными значениями предсказаний.
-    - Просуммировать целевое значение объёма сырья, соответствующее этим предсказаниям.
-    - Рассчитать прибыль для полученного объёма сырья.
-5. Посчитать риски и прибыль для каждого региона:
-    - Применить технику Bootstrap с 1000 выборок, чтобы найти распределение прибыли.
-    - Найти среднюю прибыль, 95%-й доверительный интервал и риск убытков. Убыток — это отрицательная прибыль.
-    - Написать выводы: Регион для разработки скважин.
+1. Loading and preparing data
+2. Train and validate the model for each region:
+    - Splitting the data into training and validation samples in the ratio of 75:25.
+    - Model training and predictions on the validation set.
+    - Saving the prediction and correct answers on the validation set.
+    - Print on the screen the average stock of the predicted raw material and the RMSE of the model.
+    - Analyze results.
+3. Preparation for profit calculation:
+    - Save all key values for calculations in separate variables.
+    - Calculate sufficient volume of raw materials for break-even development of a new well. Comparison of the received volume of raw materials with the average stock in each region.
+    - Conclusions on the stage of preparation of the profit calculation.
+4. Function for calculating profit for selected wells and model predictions:
+    - Select wells with maximum prediction values.
+    - Sum the target value of the volume of raw materials corresponding to these predictions.
+    - Calculate the profit for the received volume of raw materials.
+5. Calculate the risks and profits for each region:
+    - Apply the Bootstrap technique with 1000 samples to find the profit distribution.
+    - Find the average profit, 95% confidence interval and risk of loss. Loss is negative profit.
+    - Write conclusions: Region for well development.
 
-- `id` — уникальный идентификатор скважины;
-- `f0`, `f1`, `f2` — три признака точек (неважно, что они означают, но сами признаки значимы);
-- `product` — объём запасов в скважине (тыс. баррелей).
+- `id` — unique identifier of the well;
+- `f0`, `f1`, `f2` - three signs of dots (it doesn't matter what they mean, but the signs themselves are significant);
+- `product` — volume of reserves in the well (thousand barrels).
 
-***Условия задачи:***
-- Для обучения модели подходит только линейная регрессия (остальные — недостаточно предсказуемые).
-- При разведке региона исследуют 500 точек, из которых с помощью машинного обучения выбирают 200 лучших для разработки.
-- Бюджет на разработку скважин в регионе — 10 млрд рублей.
-- При нынешних ценах один баррель сырья приносит 450 рублей дохода. Доход с каждой единицы продукта составляет 450 тыс. рублей, поскольку объём указан в тысячах баррелей.
-- После оценки рисков нужно оставить лишь те регионы, в которых вероятность убытков меньше 2.5%. Среди них выбирают регион с наибольшей средней прибылью.
-- Данные синтетические: детали контрактов и характеристики месторождений не разглашаются.
+***Conditions of the problem:***
+- Only linear regression is suitable for training the model (the rest are not predictable enough).
+- When exploring the region, 500 points are explored, from which, using machine learning, the best 200 are selected for development.
+- The budget for the development of wells in the region is 10 billion rubles.
+- At current prices, one barrel of raw materials brings 450 rubles of income. The income from each unit of the product is 450 thousand rubles, since the volume is indicated in thousands of barrels.
+- After assessing the risks, you need to leave only those regions in which the probability of losses is less than 2.5%. Among them, choose the region with the highest average profit.
+- Synthetic data: details of contracts and characteristics of deposits were not disclosed.
